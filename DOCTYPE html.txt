@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Buscador Claro Empresas</title>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #0b0b0b;
+  color: white;
+}
+
+/* HEADER */
+header {
+  background: #FF2315;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+header img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+/* CONTENIDO */
+.container {
+  padding: 20px;
+}
+
+/* BUSCADOR */
+#search {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+/* RESULTADOS */
+.result {
+  background: #1c1c1c;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid #FF2315;
+}
+
+h2 {
+  color: #FF2315;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Claro_logo.svg">
+<h1>Claro Empresas Buscador</h1>
+</header>
+
+<div class="container">
+
+<input type="text" id="search" placeholder="Buscar: fibra, dedicado, roaming, seguridad...">
+
+<div id="results"></div>
+
+</div>
+
+<script>
+
+/* BASE DE DATOS DESDE PDF */
+const data = [
+
+{
+titulo: "Internet Dedicado",
+contenido: "Desde 9,5 UF 300 Mbps. 1:1 tasa de agregación. Incluye IP fija y router empresarial.",
+keywords: ["dedicado","ip","empresa","estabilidad"]
+},
+
+{
+titulo: "Fibra Empresas",
+contenido: "600 Mbps desde $12.597, 800 Mbps desde $13.437, 940 Mbps desde $15.958. Velocidad simétrica.",
+keywords: ["fibra","internet","pyme","velocidad"]
+},
+
+{
+titulo: "Fibra Dedicada",
+contenido: "300 Mbps desde 2,5 UF. IP fija, firewall, ideal para ERP y operación crítica.",
+keywords: ["dedicada","erp","ip fija","empresa"]
+},
+
+{
+titulo: "Planes Móviles",
+contenido: "Desde $6.000, roaming incluido en 51 países, redes sociales libres.",
+keywords: ["movil","portabilidad","roaming","telefono"]
+},
+
+{
+titulo: "Microsoft 365",
+contenido: "Desde 0,15 UF por usuario. Incluye Teams, OneDrive, Outlook.",
+keywords: ["office","microsoft","correo","cloud"]
+},
+
+{
+titulo: "Seguridad y Backup",
+contenido: "Desde 0,04 UF. Protección de datos y respaldo en la nube hasta 5TB.",
+keywords: ["seguridad","backup","nube","proteccion"]
+},
+
+{
+titulo: "Webex Calling",
+contenido: "Telefonía en la nube desde 0,94 UF. IVR, grabación de llamadas.",
+keywords: ["telefonia","webex","llamadas","pbx"]
+},
+
+{
+titulo: "GPS Flota",
+contenido: "Desde 0,30 UF. Monitoreo, ubicación y control de vehículos.",
+keywords: ["gps","flota","seguimiento","vehiculos"]
+}
+
+];
+
+/* BUSCADOR */
+const input = document.getElementById("search");
+const results = document.getElementById("results");
+
+input.addEventListener("keyup", function(){
+
+  let query = input.value.toLowerCase();
+  results.innerHTML = "";
+
+  data.forEach(item => {
+
+    let match = item.titulo.toLowerCase().includes(query) ||
+                item.contenido.toLowerCase().includes(query) ||
+                item.keywords.some(k => k.includes(query));
+
+    if(match){
+
+      results.innerHTML += `
+        <div class="result">
+          <h2>${item.titulo}</h2>
+          <p>${item.contenido}</p>
+        </div>
+      `;
+    }
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
